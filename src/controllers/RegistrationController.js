@@ -1,16 +1,16 @@
 import express from "express";
-import { OK, BAD_REQUEST } from "http-status-codes";
+import { NO_CONTENT, BAD_REQUEST } from "http-status-codes";
 import Logger from "../config/logger";
 import { AddTeacher, AddStudent, AddSubject, AddClass } from "../models/register";
 import { API_RESPONSE, DB_TABLE } from "../util/constants";
-import getTeacherPayload from "../dto/TeacherPayload";
-import getStudentPayload from "../dto/StudentPayload";
-import getSubjectPayload from "../dto/SubjectPayload";
-import getClassPayload from "../dto/ClassPayload";
+import getTeacherPayload from "../dto/registration/TeacherPayload";
+import getStudentPayload from "../dto/registration/StudentPayload";
+import getSubjectPayload from "../dto/registration/SubjectPayload";
+import getClassPayload from "../dto/registration/ClassPayload";
 
 const RegistrationController = express.Router();
 
-const LOG = new Logger("Registration.js");
+const LOG = new Logger("RegistrationController.js");
 
 const registerHandler = async (req, res) => {
 	try {
@@ -59,7 +59,7 @@ const registerHandler = async (req, res) => {
 			}
 		});
 
-		res.status(OK).send(API_RESPONSE.SUCCESS);
+		res.status(NO_CONTENT).send(API_RESPONSE.SUCCESS);
 	} catch (error) {
 		LOG.error(error);
 		res.status(BAD_REQUEST).send(error);
