@@ -3,10 +3,6 @@ import { NO_CONTENT, BAD_REQUEST } from "http-status-codes";
 import Logger from "../config/logger";
 import { AddTeacher, AddStudent, AddSubject, AddClass } from "../models/register";
 import { API_RESPONSE, DB_TABLE } from "../util/constants";
-import getTeacherPayload from "../dto/registration/TeacherPayload";
-import getStudentPayload from "../dto/registration/StudentPayload";
-import getSubjectPayload from "../dto/registration/SubjectPayload";
-import getClassPayload from "../dto/registration/ClassPayload";
 
 const RegistrationController = express.Router();
 
@@ -19,39 +15,34 @@ const registerHandler = async (req, res) => {
 
 		keys.forEach(async key => {
 			let obj = reqData[`${key}`];
-			let payload = {};
 
 			switch (key) {
 				case DB_TABLE.TEACHER:
-					payload = getTeacherPayload(obj);
 					if (Array.isArray(obj)) {
-						await AddTeacher.bulkCreate(payload, { fields: ["name", "email"] });
+						await AddTeacher.bulkCreate(obj, { fields: ["name", "email"] });
 					} else {
-						await AddTeacher.create(payload, { fields: ["name", "email"] });
+						await AddTeacher.create(obj, { fields: ["name", "email"] });
 					}
 					break;
 				case DB_TABLE.STUDENTS:
-					payload = getStudentPayload(obj);
 					if (Array.isArray(obj)) {
-						await AddStudent.bulkCreate(payload, { fields: ["name", "email"] });
+						await AddStudent.bulkCreate(obj, { fields: ["name", "email"] });
 					} else {
-						await AddStudent.create(payload, { fields: ["name", "email"] });
+						await AddStudent.create(obj, { fields: ["name", "email"] });
 					}
 					break;
 				case DB_TABLE.SUBJECT:
-					payload = getSubjectPayload(obj);
 					if (Array.isArray(obj)) {
-						await AddSubject.bulkCreate(payload, { fields: ["subjectCode", "name"] });
+						await AddSubject.bulkCreate(obj, { fields: ["subjectCode", "name"] });
 					} else {
-						await AddSubject.create(payload, { fields: ["subjectCode", "name"] });
+						await AddSubject.create(obj, { fields: ["subjectCode", "name"] });
 					}
 					break;
 				case DB_TABLE.CLASS:
-					payload = getClassPayload(obj);
 					if (Array.isArray(obj)) {
-						await AddClass.bulkCreate(payload, { fields: ["classCode", "name"] });
+						await AddClass.bulkCreate(obj, { fields: ["classCode", "name"] });
 					} else {
-						await AddClass.create(payload, { fields: ["classCode", "name"] });
+						await AddClass.create(obj, { fields: ["classCode", "name"] });
 					}
 					break;
 				default:
