@@ -4,8 +4,14 @@ import sequelize from "../config/database";
 const AddTeacher = sequelize.define(
 	"AddTeacher",
 	{
-		name: Sequelize.STRING,
-		email: Sequelize.STRING
+		name: {
+			type: Sequelize.STRING,
+			allowNull: false
+		},
+		email: {
+			type: Sequelize.STRING,
+			allowNull: false
+		}
 	},
 	{
 		tableName: "teacher",
@@ -16,8 +22,14 @@ const AddTeacher = sequelize.define(
 const AddStudent = sequelize.define(
 	"AddStudent",
 	{
-		name: Sequelize.STRING,
-		email: Sequelize.STRING
+		name: {
+			type: Sequelize.STRING,
+			allowNull: false
+		},
+		email: {
+			type: Sequelize.STRING,
+			allowNull: false
+		}
 	},
 	{
 		tableName: "student",
@@ -28,8 +40,14 @@ const AddStudent = sequelize.define(
 const AddSubject = sequelize.define(
 	"AddSubject",
 	{
-		subjectCode: Sequelize.STRING,
-		name: Sequelize.STRING
+		subjectCode: {
+			type: Sequelize.STRING,
+			allowNull: false
+		},
+		name: {
+			type: Sequelize.STRING,
+			allowNull: false
+		}
 	},
 	{
 		tableName: "subject",
@@ -40,8 +58,14 @@ const AddSubject = sequelize.define(
 const AddClass = sequelize.define(
 	"AddClass",
 	{
-		classCode: Sequelize.STRING,
-		name: Sequelize.STRING
+		classCode: {
+			type: Sequelize.STRING,
+			allowNull: false
+		},
+		name: {
+			type: Sequelize.STRING,
+			allowNull: false
+		}
 	},
 	{
 		tableName: "class",
